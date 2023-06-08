@@ -22,28 +22,22 @@ use Illuminate\Support\Facades\Route;
  * Route::put()    |  Actualizar
  */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Route::get('/', [PageController::class, 'home'])->name('home');
 
 // Route::get('/', function () {
 //     return 'Ruta home';
 // });
 
-Route::get('blog', function () {
-    $posts = [
-        ['id' => 1, 'title' => 'PHP', 'slug' => 'php'],
-        ['id' => 2, 'title' => 'Laravel', 'slug' => 'laravel']
-    ];
-    return view('blog', ['posts' => $posts]);
-})->name('blog');
+// Route::get('blog', [PageController::class, 'blog'])->name('blog');
 
-Route::get('blog/{slug}', function ($slug) {
-    // consulta en base de datos
-    $post = $slug;
-    return view('post', ['post' => $post]);
-})->name('post');
+// Route::get('blog/{slug}', [PageController::class, 'post'])->name('post');
 
-Route::get('buscar', function (Request $request) {
-    return $request->all();
+// Route::get('buscar', function (Request $request) {
+//     return $request->all();
+// });
+
+Route::controller(PageController::class)->group(function() {
+    Route::get('/', 'home')->name('home');
+    Route::get('blog', 'blog')->name('blog');
+    Route::get('blog/{post:slug}', 'post')->name('post');
 });
