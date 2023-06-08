@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 // Route::get('/', function () {
 //     return 'Ruta home';
@@ -35,13 +36,13 @@ Route::get('blog', function () {
         ['id' => 2, 'title' => 'Laravel', 'slug' => 'laravel']
     ];
     return view('blog', ['posts' => $posts]);
-});
+})->name('blog');
 
 Route::get('blog/{slug}', function ($slug) {
     // consulta en base de datos
     $post = $slug;
     return view('post', ['post' => $post]);
-});
+})->name('post');
 
 Route::get('buscar', function (Request $request) {
     return $request->all();
